@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head>	    
+<meta charset="UTF-8"/>
+<title>Acceuil</title>
+
+</head>
+<body class="container">
+     <div layout:fragment="content" >
+
+	        <h1 th:text="${procedure.nom}"></h1><div align="right"><a th:href="@{procedure(procedure=${procedure.nom},codeProcedure=${procedure.codeProcedure})}" class="btn btn-primary">  Retour aux éléments de la procédure</a></div>
+	        <h2 style="color:#6B8E23">Vue comptable de la procédure :</h2>
+	            <div align="right">
+	              <div class="btn btn-default">  <a th:href="@{/ajouterVueComptable(procedure=${procedure.codeProcedure})}">Ajouter Une écriture Comptable</a>  </div>
+	         </div>
+	         <div th:if="${procedure.vueComptables}">
+	         <div th:each="p:${procedure.vueComptables}">
+	          <h3 th:text="${p.description}"></h3>
+	          <div class="btn btn-default"><a th:href="@{/ajouterCredit(vueComptable=${p.codeVueCompt})}">Ajouter un Crédit </a></div>  <div class="btn btn-default">  <a th:href="@{/ajouterDebit(vueComptable=${p.codeVueCompt})}">Ajouter un Débit</a></div>
+	          
+	              <table class="table table-striped" border="2">
+	            <thead style="background-color: #8FBC8F">  <tr> <th>Operation</th> <th>Numero Compte</th><th>Libelle.</th><th>Montant</th>
+	                <th></th>
+	             </tr>
+	            </thead>
+	            <tbody>
+	            <tr th:each="o:${p.operations}">
+	              <td th:text="${o.toString()}"></td>
+	              <td th:text="${o.numeroCompte}"></td>
+	              <td th:text="${o.libelle}"></td>
+	              <td th:text="${o.montant}"></td>
+	              <td><a th:href="@{/modifierOperation(vueComptable=${p.codeVueCompt},id=${o.codeOp},type=${o.toString()})}">modifier</a> ||
+	                  <a th:href="@{/deleteOperation(vueComptable=${p.codeVueCompt},id=${o.codeOp},type=${o.toString()})}">supprimer</a></td>
+	            </tr>
+	            </tbody>
+	            </table>
+	         </div>
+	       </div>  
+	        <div th:if="!${procedure.vueComptables}">
+	          <p> N/A</p>
+	        </div>
+	 </div>
+	           
+</body>
+</html>

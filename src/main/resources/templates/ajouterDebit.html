@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+ <head>
+<meta charset="UTF-8"/>
+<title>Debit</title>
+
+</head>
+<body class="container">
+   
+   
+    <div layout:fragment="content" >
+	       <div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="panel panel-info spacer">
+					<div class="panel-heading"> Débit</div>
+						<div class="panel-body">
+						    <div class="container row">
+							    <form th:action="@{/AjouterDebit}" th:object="${debit}" method="post"
+						           	class="form-horizontal" role="form">
+						           	<input th:type="hidden" name="codeOp" th:field="${debit.codeOp}" />
+								   <div class="form-group">
+							          <input type="text" th:value="${vueComptable.codeVueCompt}" name="vueComptable"  style="display:none;"/>
+								   </div>
+								  
+								  <div class="form-group">
+								  <div class="col-sm-9">
+								   <label>Numero Compte</label> <textarea  
+										class="form-control" th:field="*{numeroCompte}" ></textarea> 
+										<span
+										th:if="${#fields.hasErrors('numeroCompte')}"
+										th:errors="*{numeroCompte}" class="error"></span>
+								    </div>
+								    </div>
+							       <div class="form-group">
+							       <div class="col-sm-9">
+								   <label>Libelle</label> <textarea  
+										class="form-control" th:field="*{libelle}" ></textarea> 
+										<span
+										th:if="${#fields.hasErrors('libelle')}"
+										th:errors="*{libelle}" class="error"></span>
+								    </div>
+								    </div>
+							       <div class="form-group">
+							       <div class="col-sm-9">
+								   <label>Montant</label> <textarea  
+										class="form-control" th:field="*{montant}" ></textarea> 
+										<span
+										th:if="${#fields.hasErrors('montant')}"
+										th:errors="*{montant}" class="error"></span>
+								    </div>
+							       </div>
+									 
+  	
+								 
+									<button type="submit" class="btn btn-primary">Enregistrer </button>
+									<button type="reset" class="btn btn-default">Annuler</button>
+									
+									<span class="success" th:utext="${successMessage}"></span>
+								</form>
+								</div>
+							</div>
+						</div>
+					</div>
+	   </div>
+</body>
+</html>

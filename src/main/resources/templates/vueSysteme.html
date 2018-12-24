@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head>	    
+<meta charset="UTF-8"/>
+<title>Acceuil</title>
+
+</head>
+<body class="container">
+  <div layout:fragment="content" >
+	        <h1 th:text="${procedure.nom}"></h1><div align="right"><a th:href="@{procedure(procedure=${procedure.nom},codeProcedure=${procedure.codeProcedure})}" class="btn btn-primary">Retour aux éléments de la procédure</a></div>
+	        <h2 style="color:		#6B8E23">Vue système de la procédure :</h2>
+	        
+	        <div align="right">
+	              <div class="btn btn-default">  <a th:href="@{/ajouterVueSysteme(procedure=${procedure.codeProcedure})}">Ajouter Une Application</a>  </div>
+	         </div>
+	    
+	        <table class="table table-striped" border="2">
+	            <thead style="background-color: #8FBC8F"> <tr><th>Application</th> <th>Traitements Informatique/ Fonctionnalités</th><th>Operation</th>
+	             </tr>
+	            </thead>
+	            <tbody>
+	                
+	               <tr th:each="p:${procedure.vueSystemes}">
+	                <td th:text="${p.application}"></td>
+	                <td th:text="${p.fonctionnalite}"></td>
+	                <td><a th:href="@{/modifierVueSysteme(procedure=${procedure.codeProcedure},id=${p.codeVueSystem})}">modifier</a>||
+	                 <a th:href="@{/deleteVueSysteme(procedure=${procedure.codeProcedure},id=${p.codeVueSystem})}">supprimer</a></td>
+	               </tr>
+	            </tbody>
+	        </table>  
+	     </div>       
+</body>
+</html>

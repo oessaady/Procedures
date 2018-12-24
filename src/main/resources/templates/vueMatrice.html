@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head>	    
+<meta charset="UTF-8"/>
+<title>Acceuil</title>
+
+</head>
+<body class="container">  
+   
+  <div layout:fragment="content" >
+	        <h1 th:text="${procedure.nom}"></h1><div align="right"><a th:href="@{procedure(procedure=${procedure.nom},codeProcedure=${procedure.codeProcedure})}" class="btn btn-primary"> Retour aux éléments de la procédure</a></div>
+	        <h2 style="color:		#6B8E23">Vue matrice de contrôle :</h2>
+	          
+	          <div align="right">
+	              <div class="btn btn-default">  <a th:href="@{/ajouterVueMatrice(procedure=${procedure.codeProcedure})}">Ajouter Un mode de Contrôle</a>  </div>
+	         </div>
+	          
+	        <table class="table table-striped" border="2">
+	            <thead style="background-color: #8FBC8F"> <tr> <th>Contrôles</th> <th>Auteur </th><th>Support </th><th>Matérialisation </th><th>Périodicité </th><th>Finalité </th>
+	            <th>Opertaion</th>
+	            </tr>
+	            </thead>
+	            <tbody>
+	               <tr th:each="p:${procedure.vueMatrices}">
+	                  <td th:text="${p.control}"></td>
+	                   <td th:text="${p.auteur}"></td>
+	                    <td th:text="${p.support}"></td>
+	                     <td th:text="${p.materialisation}"></td>
+	                      <td th:text="${p.periodicite}"></td>
+	                       <td th:text="${p.finalite}"></td>
+	                        <td><a th:href="@{/modifierVueMatrice(procedure=${procedure.codeProcedure},id=${p.codeVueMatrice})}">modifier</a> ||
+	                            <a th:href="@{/deleteVueMatrice(procedure=${procedure.codeProcedure},id=${p.codeVueMatrice})}">supprimer</a></td>
+	               </tr>
+	            </tbody>
+	        </table>  
+	  </div>          
+</body>
+</html>

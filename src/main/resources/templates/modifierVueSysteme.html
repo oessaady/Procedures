@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head>	    
+ <meta charset="UTF-8" />
+<title>modifier Vue Systeme</title>
+
+</head>
+<body class="container">
+ 
+    <div layout:fragment="content" >  
+      <div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="panel panel-info spacer">
+							<div class="panel-heading">Vue Systeme</div>
+							<div class="panel-body">
+								<form th:action="@{/AjouterVueSysteme}" th:object="${vueSysteme}" method="post">
+								<input th:type="hidden" name="codeVueSystem" th:field="${vueSysteme.codeVueSystem}" />
+								   <div class="form-group">
+							          <input type="text" th:value="${procedure.codeProcedure}" name="procedure"  style="display:none;"/>
+								   </div>
+									<div class="form-group">
+										<label>Application</label> <input type="text"
+											th:field="*{application}" class="form-control"/>
+											<span
+										th:if="${#fields.hasErrors('application')}"
+										th:errors="*{application}" class="error"></span>
+								
+									</div>
+									<div class="form-group">
+										<label>Fonctionnalite</label> <textarea
+											th:field="*{fonctionnalite}" class="form-control"></textarea>
+											<span
+										th:if="${#fields.hasErrors('fonctionnalite')}"
+										th:errors="*{fonctionnalite}" class="error"></span>
+										
+									</div>
+									<button type="submit" class="btn btn-primary">Enregistrer</button>
+									<button type="reset" class="btn btn-default">Annuler</button>
+								</form>
+							</div>
+						</div>
+					</div>
+</div>
+
+ </body>
+</html>

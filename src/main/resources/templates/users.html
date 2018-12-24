@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="pagedba">
+<head>
+<meta charset="UTF-8"/>
+<title>Utilisateurs</title>
+
+</head>
+<body class="container">
+   
+     <div layout:fragment="content" >
+
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+        <a th:href="@{/register}" class="btn btn-primary">ajouter un utilisateur</a>
+            <table class="table table-stripped" border="2">
+              <thead> <th>login</th> <th>Role</th> <th>Operataion</th> </thead>
+              <tbody>
+               <tr th:each="u:${users}">
+                <td th:value="${u.username}" th:text="${u.username}"></td>
+                <td >
+                  <ul>
+                    <li th:each="r:${u.roles}" th:text="${r.role}"></li>
+                  </ul>
+                </td>
+                <td> <a th:href="@{/users/deleteUser(username=${u.username})}">Supprimer</a> </td>
+               </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

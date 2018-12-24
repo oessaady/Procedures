@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head>	    
+<meta charset="UTF-8"/>
+<title>accès refusé</title>
+
+</head>
+<body class="container">
+  <div layout:fragment="content" >
+
+
+     <div class="alert alert-danger">
+        <h1> L'accès est refusé</h1>
+        <div th:inline="text" >Bonjour '[[${#httpServletRequest.remoteUser}]]',
+          vous n'avez pas le droit d'accèder à cette page.
+        </div>
+    </div>
+
+</div>
+<!-- /.container -->
+
+</body>
+</html>

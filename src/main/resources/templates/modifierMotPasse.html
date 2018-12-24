@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head>
+<meta charset="UTF-8"/>
+<title>Modifier Mot de Passe</title>
+
+</head>
+<body class="container">
+   
+ <div layout:fragment="content" > 
+	<div class="panel panel-info spacer">
+					<div class="panel-heading"> Nouveau Utilisateur :</div>
+		<div class="panel-body">
+		  <div class="container">
+               <form th:action="@{/modifieMotDePasse}" method="post" >
+               
+               
+                <fieldset> 
+                <div th:if="${error}"  class="col-sm-9">
+                        <div class="alert alert-danger">
+                           <p th:text="${error}"></p>
+                        </div>
+                    </div>         
+                    <div class="form-group">
+								    <div class="col-sm-9">
+									 <input  type="hidden" name="username"
+										class="form-control" th:value="${user.username}" /> 
+								    </div>
+					  </div>
+					  <div class="form-group">
+								    <div class="col-sm-9">
+									<label>Ancien Mot de Passe</label> <input  type="password"
+										class="form-control" name="ancienMotPass" required="required"/> 
+										
+								    </div>
+					  </div>
+					   <div class="form-group">
+								    <div class="col-sm-9">
+									<label>Nouveau Mot de Passe</label> <input  type="password"
+										class="form-control" name="nouveauMotPass" required="required"/> 						
+								    </div>
+					  </div>
+					 
+                    
+
+                    <div  class="form-group">
+                       <div class="col-sm-9">
+                            <p></p>
+                            <input type="submit" class="btn btn-primary" value="Ajouter Utilisateur"/>
+                            <input type="reset" class="btn btn-primary" value="Annuler"/>
+                       </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

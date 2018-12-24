@@ -1,0 +1,11 @@
+server:
+    context-path: /gestionProcedures
+
+spring: 
+    main:
+        banner-mode: "off"       
+
+logging: 
+    level: 
+        org: 
+            springframework: ERROR

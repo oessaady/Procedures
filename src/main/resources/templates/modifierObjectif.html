@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head>
+<meta charset="UTF-8"/>
+<title>modifier Objectif</title>
+
+</head>
+<body class="container">   
+   
+   <div layout:fragment="content" >
+	       <div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="panel panel-info spacer">
+					<div class="panel-heading"> Objectifs, Intervenants</div>
+						<div class="panel-body">
+						    <div class="container row">
+							    <form th:action="@{/AjouterObjectif}" th:object="${objectif}" method="post"
+						           	class="form-horizontal" role="form">
+						           	<input th:type="hidden" name="codeObjectif" th:field="${objectif.codeObjectif}" />
+								   <div class="form-group">
+							          <input type="text" th:value="${procedure.codeProcedure}" name="procedure"  style="display:none;"/>
+								   </div>
+								  
+								  <div class="form-group">
+								    <div class="col-sm-9">
+									<label>Objectif</label> <textarea  
+										class="form-control" th:field="*{description}" ></textarea> <span
+										th:if="${#fields.hasErrors('description')}"
+										th:errors="*{description}" class="error"></span>
+								    </div>
+							      </div>
+							      <div class="form-group">
+								    <div class="col-sm-9">
+									<label>Acteurs Internes :</label> <textarea  
+										class="form-control" th:field="*{intervenantInternes}" ></textarea> <span
+										th:if="${#fields.hasErrors('intervenantInternes')}"
+										th:errors="*{intervenantInternes}" class="error"></span>
+								    </div>
+							      </div>
+							      <div class="form-group">
+								    <div class="col-sm-9">
+									<label>Acteurs Externes :  </label> <textarea  
+										class="form-control" th:field="*{intervenantExternes}" ></textarea> <span
+										th:if="${#fields.hasErrors('intervenantExternes')}"
+										th:errors="*{intervenantExternes}" class="error"></span>
+								    </div>
+							      </div>
+									 
+  	
+								 
+									<button type="submit" class="btn btn-primary">Enregistrer </button>
+									<button type="reset" class="btn btn-default">Annuler</button>
+									
+									<span class="success" th:utext="${successMessage}"></span>
+								</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+ </body>
+</html>

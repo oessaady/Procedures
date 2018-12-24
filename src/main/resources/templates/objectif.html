@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head>	    
+ <meta charset="UTF-8" />
+<title>Acceuil</title>
+
+</head>
+<body class="container">
+  <div layout:fragment="content" >
+	<h1 th:text="${procedure.nom}"></h1>   <div align="right"><a th:href="@{procedure(procedure=${procedure.nom},codeProcedure=${procedure.codeProcedure})}" class="btn btn-primary"> Retour aux éléments de la procédure</a></div>
+
+	<h2 style="color: #6B8E23">Objectifs, Intervenants, contexte et
+		règles de gestion</h2>
+	<div class="panel panel-info spacer">
+		<div class="panel-heading" >
+		 Objectifs, Intervenants 
+			<div align="right"> <div class="btn btn-default">
+				<a th:href="@{/ajouterObjectif(procedure=${procedure.codeProcedure})}">Ajouter Objectif ,Intervenants</a>
+			</div></div>
+		</div>
+		<div class="panel-body">
+			<div th:if="${procedure.objectif}">
+				<table class="table table-striped" border="2">
+					<thead style="background-color: #8FBC8F">
+						<tr>
+							<th>Objectif</th>
+							<th>Intervenants</th>
+							<th>opération</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td th:text="${procedure.objectif.description}"></td>
+							<td><strong>Acteurs Internes :</strong><br />
+								<p th:text="${procedure.objectif.intervenantInternes}"></p>
+								<strong>Acteurs Externes :  </strong> <br />
+								<p th:text="${procedure.objectif.intervenantExternes}"></p>
+							</td>
+
+							<td><a
+								th:href="@{/modifierObjectif(id=${procedure.objectif.codeObjectif},procedure=${procedure.codeProcedure})}">modifier</a>
+								</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	 
+	<div class="panel panel-info spacer">
+		<div class="panel-heading" >
+		 Cadre légal et réglementaire : 
+			<div align="right"> <div class="btn btn-default">
+				<a th:href="@{/ajouterCadre(procedure=${procedure.codeProcedure})}">Ajouter un Cadre légal</a>
+			</div></div>
+		</div>
+		<div class="panel-body">
+	<div th:if="${procedure.cadresLegales}">
+		<table class="table table-striped" border="2">
+			<thead style="background-color: #8FBC8F">
+				<tr>
+					<th>cadre légal</th>
+					<th>opération</th>
+				</tr>
+			</thead>
+			<tbody>
+
+
+				<tr th:each="c:${procedure.cadresLegales}">
+					<td th:text="${c.description}"></td>
+					<td><a
+						th:href="@{/modifierCadre(id=${c.codeCadre},procedure=${procedure.codeProcedure})}">modifier</a>||
+						<a th:href="@{/deleteCadreLegal(id=${c.codeCadre},procedure=${procedure.codeProcedure})}">supprimer</a></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</div></div>
+	
+	<div class="panel panel-info spacer">
+		<div class="panel-heading" >
+		 Règles de gestion : 
+			<div align="right"> <div class="btn btn-default">
+                     <a th:href="@{/ajouterRegle(procedure=${procedure.codeProcedure})}">Ajouter une régle</a> </div></div>
+		</div>
+		<div class="panel-body">
+	<div th:if="${procedure.reglesGestions}">
+		<table class="table table-striped" border="2">
+			<thead style="background-color: #8FBC8F">
+				<tr>
+					<th>Régles</th>
+					<th>opération</th>
+				</tr>
+			</thead>
+			<tbody>
+
+
+				<tr th:each="r:${procedure.reglesGestions}">
+					<td th:text="${r.description}"></td>
+					<td><a
+						th:href="@{/modifierRegle(id=${r.codeRegle},procedure=${procedure.codeProcedure})}">modifier</a>||
+						<a th:href="@{/deleteRegle(id=${r.codeRegle},procedure=${procedure.codeProcedure})}">supprimer</a></td>
+				</tr>
+
+			</tbody>
+		</table>
+	 </div>
+   </div>
+  </div>
+</div>
+
+</body>
+</html>

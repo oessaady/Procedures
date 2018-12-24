@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head>	    
+ <meta charset="UTF-8"/>
+<title>Acceuil</title>
+
+</head>
+<body class="container">
+   
+   <div layout:fragment="content" >
+	     <h2 th:text="${processus.nom}"></h2>
+	    <div class="panel panel-default">
+			<div class="panel-heading">
+				<ul class="nav nav-pills">
+				<li><a th:href="@{/ListProcedures(processus=${processus.codeProcessus})}" class="btn btn-success">Liste des Procédures</a></li>
+					<li><a th:href="@{/AjoutProcedure(processus=${processus.codeProcessus})}" class="btn btn-primary">Ajouter une nouvelle Procédure</a></li>
+					<li><a th:href="@{/SupprimerProcedure(processus=${processus.codeProcessus})}" class="btn btn-danger">Supprimer une Procédure</a></li>
+					  <li>   <a th:href="@{ListProcessus(domain=${domain})}" class="btn btn-warning">   liste des Processus</a></li>
+					 
+				</ul>
+			</div>
+			<div class="panel-body">
+				<div class="container row">
+				    <div th:if="${procedure}">
+				         <form th:action="@{/AjoutProcedure}" th:object="${procedure}" method="post"
+							class="form-horizontal" role="form">
+					       <div class="form-group">
+								<div class="col-sm-9">
+									 <input type="text" th:value="${processus.codeProcessus}" th:attr="name='processus'"  style="display:none;"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-9">
+									<label>Description</label> <input type="text"
+										class="form-control" th:field="*{nom}" /> <span
+										th:if="${#fields.hasErrors('nom')}"
+										th:errors="*{nom}" class="error"></span>
+								</div>
+							</div>
+							 
+							
+							<div class="form-group">
+								<div class="col-sm-9">
+									<button type="submit" class="btn btn-primary btn-block">Enregistrer</button>
+								</div>
+							</div>
+							
+							<span class="success" th:utext="${successMessage}"></span>
+						</form>
+				    </div>
+				    <div th:if="${proceduresAsupprimer}">
+				         <form th:action="@{/SupprimerProcedure}"  method="post"
+							class="form-horizontal" role="form">
+					       <div class="form-group">
+								<div class="col-sm-9">
+									 <input type="text" th:value="${processus.codeProcessus}" th:attr="name='processus'"  style="display:none;"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-9">
+									<label>Procedures</label> <select 
+										class="form-control" name="procedure"  >
+										<option th:each="p:${proceduresAsupprimer}" th:value="${p.codeProcedure}" th:text="${p.nom}"></option>
+										</select>
+								</div>
+							</div>
+							 
+							
+							<div class="form-group">
+								<div class="col-sm-9">
+									<button type="submit" class="btn btn-primary">supprimer</button>
+								</div>
+							</div>
+							
+							<span class="success" th:utext="${successMessage}"></span>
+						</form>
+				    </div>
+				 </div>
+				       
+				    
+				 
+				    <div th:if="${listProcedures}">
+				      <span class="success" th:utext="${successMessage}"></span>
+				        <div class="list-group" align="center" th:each="p:${listProcedures}">
+	   	                  <a th:href="@{/procedure(procedure=${p.nom},codeProcedure=${p.codeProcedure})}" th:text="${p.nom}" class="list-group-item list-group-item-action list-group-item-warning"></a>
+	                    </div>
+				    </div>
+				</div>
+		 
+	 </div>			
+</div>	       
+	     
+	        
+	  
+ </body>
+</html>

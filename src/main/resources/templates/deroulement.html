@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head> 
+<meta charset="UTF-8"/>
+<title>Acceuil</title>
+
+</head>
+<body class="container">
+   
+   
+   <div layout:fragment="content" >
+	        <h1 th:text="${procedure.nom}"></h1> <div align="right"><a th:href="@{procedure(procedure=${procedure.nom},codeProcedure=${procedure.codeProcedure})}" class="btn btn-primary"> Retour aux éléments de la procédure</a></div>
+	        <h2 style="color:		#6B8E23">	Déroulement de la procédure</h2> 
+	             
+	              <div align="right">
+	              <div class="btn btn-default">  <a th:href="@{/ajouterDeroulement(procedure=${procedure.codeProcedure})}">Ajouter Une étape</a>  </div>
+	              </div>
+	    
+	        <table class="table table-striped" border="2">
+	            <thead style="background-color: #8FBC8F"> 
+	            <tr>
+	            <th rowspan="2">N°</th>
+				<th>Evénement Déclencheur</th>
+				<th>Etapes/Opérations</th>
+				<th  >SI</th>
+				<th rowspan="2">Documents associés</th>
+				
+				<th rowspan="2">Operation</th>
+			     </tr>
+	            <tr>
+	              <th>Acteurs</th>
+				<th>Descriptif de l’opération</th>
+				<th>Délai</th>
+	            </tr>
+	          </thead>
+	            <tbody>
+	               
+	               <tr th:each="p:${procedure.deroulements}">
+	               <tr>
+	               	         <td rowspan="2" th:text="${p.numero}"></td>
+	                <td th:text="${p.evenementDeclencheur}"> </td>
+	                <td th:text="${p.operation}"> </td>
+	                <td th:text="${p.si}"> </td>
+	                <td th:text="${p.documentAssocie}" rowspan="2"> </td>
+	                <td  rowspan="2"><a th:href="@{/modifierDeroulement(procedure=${procedure.codeProcedure},id=${p.codeDeroulement})}">modifier</a> ||
+	                                 <a th:href="@{/deleteDeroulement(procedure=${procedure.codeProcedure},id=${p.codeDeroulement})}">supprimer</a> </td>
+	               </tr>
+	               <tr>
+	               <td th:text="${p.acteurs}"> </td>
+	               <td th:text="${p.description}"> 
+	               </td>
+	               <td th:text="${p.delai}"> </td>         
+	               
+	               </tr>
+	                  </tr>
+	            </tbody>
+	        </table>      
+	    
+	  </div>    
+ 
+</body>
+</html>

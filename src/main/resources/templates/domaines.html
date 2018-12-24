@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	layout:decorator="index">
+<head>
+<meta charset="UTF-8" />
+<title>Acceuil</title>
+
+</head>
+<body class="container">
+
+	<div layout:fragment="content">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<ul class="nav nav-pills">
+					 
+					<li><a
+						class="btn btn-primary" th:href="@{/AjouterDomaine}">Ajouter un Domaine</a></li>
+						<li><a
+						class="btn btn-danger" th:href="@{/SupprimerDomaine}">Supprimer un Domaine</a></li>
+				</ul>
+			</div>
+			<div class="panel-body">
+			 	<span class="success" th:utext="${successMessage}"></span>
+                 <div th:if="${domaines}">
+					<div class="list-group" align="center" th:each="d:${domaines}">
+						<a
+							th:href="@{/domaine(domain=${d.nom},codeDomain=${d.codeDomain})}"
+							th:text="${d.nom}"
+							class="list-group-item list-group-item-action list-group-item-success"></a>
+					</div>
+				</div>	
+				<div class="container row">
+				    <div th:if="${domaine}">
+				         <form th:action="@{/AjouterDomaine}" th:object="${domaine}" method="post"
+							class="form-horizontal" role="form">
+					        
+							<div class="form-group">
+								<div class="col-sm-9">
+									<label>Description</label> <input type="text"
+										class="form-control" th:field="*{nom}" /> <span
+										th:if="${#fields.hasErrors('nom')}"
+										th:errors="*{nom}" class="error"></span>
+								</div>
+							</div>
+							 
+							
+							<div class="form-group">
+								<div class="col-sm-9">
+									<button type="submit" class="btn btn-primary btn-block">Enregistrer</button>
+								</div>
+							</div>
+							
+							<span class="success" th:utext="${successMessage}"></span>
+						</form>
+				    </div>
+				     <div th:if="${domainesAsupprimer}">
+				         <form th:action="@{/SupprimerDomaine}"  method="post"
+							class="form-horizontal" role="form">
+					        
+							<div class="form-group">
+								<div class="col-sm-9">
+									<label>Domaines</label> <select 
+										class="form-control" name="domaine"  >
+										<option th:each="d:${domainesAsupprimer}" th:value="${d.codeDomain}" th:text="${d.nom}"></option>
+										</select>
+								</div>
+							</div>
+							 
+							
+							<div class="form-group">
+								<div class="col-sm-9">
+									<button type="submit" class="btn btn-primary">supprimer</button>
+								</div>
+							</div>
+							
+							<span class="success" th:utext="${successMessage}"></span>
+						</form>
+				    </div>
+			   </div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

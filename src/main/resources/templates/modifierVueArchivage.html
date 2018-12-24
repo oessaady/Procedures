@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head>	    
+ <meta charset="UTF-8" />
+<title>modifeir Vue Archivage</title>
+
+</head>
+<body class="container">
+
+
+   <div layout:fragment="content" >
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="panel panel-info spacer">
+			<div class="panel-heading">Vue archivage de la procédure :</div>
+			<div class="panel-body">
+				<form th:action="@{/AjouterVueArchivage}" th:object="${vueArchivage}"
+					method="post">
+					<input th:type="hidden" name="codeVueArchiv" th:field="${vueArchivage.codeVueArchiv}" />
+					<div class="form-group">
+						<input type="text" th:value="${procedure.codeProcedure}"
+							name="procedure" style="display: none;" />
+					</div>
+					<div class="form-group">
+						<label>Document</label> <input type="text" th:field="*{document}"
+							class="form-control" /> <span
+							th:if="${#fields.hasErrors('document')}"
+							th:errors="*{document}" class="error"></span>
+					</div>
+					<div class="form-group">
+						<label>Emetteur</label> <input type="text" th:field="*{emeteur}"
+							class="form-control" /> <span
+							th:if="${#fields.hasErrors('emeteur')}"
+							th:errors="*{emeteur}" class="error"></span>
+					</div>
+					<div class="form-group">
+						<label>Nbr. d'exemplaires</label> <input type="text"
+							th:field="*{nbrExp}" class="form-control" /> <span
+							th:if="${#fields.hasErrors('nbrExp')}"
+							th:errors="*{nbrExp}" class="error"></span>
+					</div>
+					<div class="form-group">
+						<label>Destinataire</label> <input type="text"
+							th:field="*{destinataire}" class="form-control" /> <span
+							th:if="${#fields.hasErrors('destinataire')}"
+							th:errors="*{destinataire}" class="error"></span>
+					</div>
+					<div class="form-group">
+						<label>Archivage</label>
+						<div class="form-group">
+							<label>Mode</label> <input type="text" th:field="*{mode}"
+								class="form-control" /> <span
+								th:if="${#fields.hasErrors('mode')}"
+								th:errors="*{mode}" class="error"></span>
+						</div>
+						<div class="form-group">
+							<label>Frequence</label> <input type="text"
+								th:field="*{frequence}" class="form-control" /> <span
+								th:if="${#fields.hasErrors('frequence')}"
+								th:errors="*{frequence}" class="error"></span>
+						</div>
+						<div class="form-group">
+							<label>Lieu</label> <input type="text" th:field="*{lieu}"
+								class="form-control" /> <span
+								th:if="${#fields.hasErrors('lieu')}"
+								th:errors="*{lieu}" class="error"></span>
+						</div>
+
+					</div>
+					<button type="submit" class="btn btn-primary">Enregistrer</button>
+					<button type="reset" class="btn btn-default">Annuler</button>
+				</form>
+			</div>
+		</div>
+	</div>
+ </div>	
+ </body>
+</html>

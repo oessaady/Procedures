@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="pagedba">
+<head>
+<meta charset="UTF-8"/>
+<title>Ajouter Utilisateur</title>
+
+</head>
+<body class="container">
+   
+ <div layout:fragment="content" >
+
+ 
+	<div class="panel panel-info spacer">
+					<div class="panel-heading"> Nouveau Utilisateur :</div>
+		<div class="panel-body">
+		  <div class="container">
+               <form th:action="@{/register}" method="post" th:object="${user}" >
+                <fieldset>          
+                    <div class="form-group">
+								    <div class="col-sm-9">
+									<label>Login</label> <input  type="text"
+										class="form-control" th:field="*{username}" /> 
+										<span
+										th:if="${#fields.hasErrors('username')}"
+										th:errors="*{username}" class="error"></span>
+								    </div>
+					  </div>
+					  <div class="form-group">
+								    <div class="col-sm-9">
+									<label>Mot de Passe</label> <input  type="password"
+										class="form-control" th:field="*{password}" /> 
+										<span
+										th:if="${#fields.hasErrors('password')}"
+										th:errors="*{password}" class="error"></span>
+								    </div>
+					  </div>
+					  <div class="form-group">
+								    <div class="col-sm-9">
+									<label>Role</label> <select
+										class="form-control" th:field="*{roles}" >
+										<option  th:each="r:${roles}" th:value="${r.role}" th:text="${r.role}"></option>
+								
+										</select> 
+										<span
+										th:if="${#fields.hasErrors('roles')}"
+										th:errors="*{roles}" class="error"></span>
+								    </div>
+					  </div>
+                    
+
+                    <div  class="form-group">
+                       <div class="col-sm-9">
+                            <p></p>
+                            <input type="submit" class="btn btn-primary" value="Ajouter Utilisateur"/>
+                        
+                       </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

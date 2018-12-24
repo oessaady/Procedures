@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head>	    
+ <meta charset="UTF-8"/>
+<title>Acceuil</title>
+
+</head>
+<body class="container">
+   
+   
+   <div layout:fragment="content" >
+	        <h1 th:text="${procedure.nom}"></h1><div align="right"><a th:href="@{procedure(procedure=${procedure.nom},codeProcedure=${procedure.codeProcedure})}" class="btn btn-primary"> Retour aux éléments de la procédure</a></div>
+	         <h2 style="color:		#6B8E23">Vue archivage de la procédure :</h2>
+	         
+	          <div align="right">
+	              <div class="btn btn-default">  <a th:href="@{/ajouterVueArchivage(procedure=${procedure.codeProcedure})}">Ajouter Un mode d'archivage</a>  </div>
+	         </div>
+	         
+	        <table class="table table-striped" border="2">
+	            <thead style="background-color: #8FBC8F">  <tr> <th rowspan="2">Documents</th> <th rowspan="2">Emet</th><th rowspan="2">Nbr.  d’exp.</th><th rowspan="2">Dest</th><th colspan="3">Archivage</th>
+	                <th rowspan="2">Operation</th>
+	             </tr>
+	             <tr><th>Mode </th><th>Fréquence </th><th>Lieu </th></tr>
+	            </thead>
+	            <tbody>
+	             
+	                 <tr th:each="p:${procedure.vueArchivages}">
+	               <td th:text="${p.document}"> </td>
+	               <td th:text="${p.emeteur}"> </td>
+	               <td th:text="${p.nbrExp}"></td>
+	               <td th:text="${p.destinataire}"></td>
+	               <td th:text="${p.mode}"></td>
+	               <td th:text="${p.frequence}"></td>
+	               <td th:text="${p.lieu}"></td>
+	                <td><a th:href="@{/modifierVueArchivage(procedure=${procedure.codeProcedure},id=${p.codeVueArchiv})}">modifier</a> ||
+	                    <a th:href="@{/deleteVueArchivage(procedure=${procedure.codeProcedure},id=${p.codeVueArchiv})}">supprimer</a></td>
+	               </tr>
+	            </tbody>
+	        </table>      
+	    
+	   </div> 
+	
+ </body>
+</html>

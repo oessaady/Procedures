@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head> 
+<meta charset="UTF-8"/>
+<title>Modifier Deroulement</title>
+
+</head>
+<body class="container">
+   
+   <div layout:fragment="content" >
+	    <h2 th:text="${procedure.nom}"></h2>
+	     <div class="col-md-12 col-sm-12 col-xs-12">
+						<div class="panel panel-info spacer">
+							<div class="panel-heading">	Déroulement de la procédure</div>
+							<div class="panel-body">
+								<form th:action="@{/AjouterDeroulement}" th:object="${deroulement}" method="post">
+								<input th:type="hidden" name="codeDeroulement" th:field="${deroulement.codeDeroulement}" />
+								  <div class="form-group">
+							          <input type="text" th:value="${procedure.codeProcedure}" name="procedure"  style="display:none;"/>
+								   </div>
+								   <div class="form-group">
+										<div class="col-sm-9">
+										<label>Numero :</label> <input 
+											th:field="*{numero}" class="form-control"/>
+											 
+								        </div>
+									</div>
+									
+										 
+									<div class="form-group">
+										<div class="col-sm-9">
+										<label>Evenement declencheur :</label> <input type="text"
+											th:field="*{evenementDeclencheur}" class="form-control"/>
+											<span
+										th:if="${#fields.hasErrors('evenementDeclencheur')}"
+										th:errors="*{evenementDeclencheur}" class="error"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-9">
+										<label>Acteurs :</label> <textarea 
+											th:field="*{acteurs}" class="form-control"></textarea>
+											<span
+										th:if="${#fields.hasErrors('acteurs')}"
+										th:errors="*{acteurs}" class="error"></span>
+								        </div>
+									</div>
+								 
+									<div class="form-group">
+									  	<div class="col-sm-9">
+										<label>Operation :</label> <input type="text"
+											th:field="*{operation}" class="form-control"/>
+											<span
+										th:if="${#fields.hasErrors('operation')}"
+										th:errors="*{operation}" class="error"></span>
+										</div>
+									</div>
+									<div class="form-group">
+									 	<div class="col-sm-9">
+										 <label>Descriptif de l'operation :</label> <textarea 
+											th:field="*{description}" class="form-control"></textarea>
+											<span
+										th:if="${#fields.hasErrors('description')}"
+										th:errors="*{description}" class="error"></span>
+										</div>
+									</div>
+									<div class="form-group">
+									 <div class="col-sm-9">
+										<label>SI :</label> <input type="text"
+											th:field="*{si}" class="form-control"/>
+											<span
+										th:if="${#fields.hasErrors('si')}"
+										th:errors="*{si}" class="error"></span>
+									  </div>	
+									</div>
+									<div class="form-group">
+									  <div class="col-sm-9">
+										<label>Délai :</label> <input type="text"
+											th:field="*{delai}" class="form-control"/>
+											<span
+										th:if="${#fields.hasErrors('delai')}"
+										th:errors="*{delai}" class="error"></span>
+									    </div>	
+									</div>
+									<div class="form-group">
+									  <div class="col-sm-9">
+										<label>Documents associés :</label> <input type="text"
+											th:field="*{documentAssocie}" class="form-control"/>
+											<span
+										th:if="${#fields.hasErrors('documentAssocie')}"
+										th:errors="*{documentAssocie}" class="error"></span>
+									   </div>	
+									</div>
+									<div class="form-group">
+									  <div class="col-sm-9">
+									<button type="submit" class="btn btn-primary">Enregistrer </button>
+									<button type="reset" class="btn btn-default">Annuler</button>
+									</div>
+								   </div>	
+								</form>
+							</div>
+						</div>
+					</div>
+	</div>
+</body>
+</html>

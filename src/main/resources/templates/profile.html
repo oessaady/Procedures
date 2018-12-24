@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeLeaf/layout"
+	    layout:decorator="index">
+<head>
+<meta charset="UTF-8"/>
+<title>Compte Utilisateur</title>
+
+</head>
+<body class="container">
+   
+ <div layout:fragment="content" >
+
+ 
+	<div class="panel panel-info spacer">
+					<div class="panel-heading"> Profile :</div>
+		<div class="panel-body">
+		  <div class="container">
+            <table style="padding: 10%">
+            <tr >
+            <td > Login : </td> <td th:text="${user.username}"></td>
+             </tr>
+             <tr>
+             <td> Role : </td> <td>   <ul>     <li th:each="r:${user.roles}" th:text="${r.role}"></li> </ul></td>
+             </tr>
+             
+             <tr>
+             <td> Changer Mot de passe : </td> <td> <a th:href="@{/modifieMotDePasse}" class="btn btn-link">Modier Mot de passe</a></td>
+             </tr>
+            
+            </table>   
+            
+        </div>
+    </div>
+</div>
+</div>
+
+</body>
+</html>
